@@ -15,6 +15,10 @@ public class Print {
         Method method = this.getClass().getMethod(methodName, Object.class);
         method.invoke(this, obj);
     }
+    //输出boolean
+    public void Printboolean(Object obj){
+        System.out.println((boolean) obj);
+    }
     //输出List
     public void PrintList(Object obj){
         ArrayList<Object> list = new ArrayList<>();

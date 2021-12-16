@@ -29,6 +29,7 @@ public class Solution {
             Class clazz = parameterTypes[i];
             InvokParameter a = new InvokParameter();
             objects[i] = a.invokParameter(parameter, clazz);
+            i++;
         }
         Object answer = method.invoke(methods, objects);
         //在这里要写一个方法,能够根据返回类型做出不同输出
