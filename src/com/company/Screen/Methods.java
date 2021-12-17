@@ -9,39 +9,27 @@ import com.company.Bean.TreeNode;
 
 /*这里存放所有的算法*/
 public class Methods {
-    List<Integer> aList;
-    List<Integer> bList;
-    public boolean isSubStructure(TreeNode A, TreeNode B) {
-        //把两个树转换为char数组,进行比较
-        aList = new ArrayList<>();
-        changeToArray(B);
-        bList = aList;
-        aList = new ArrayList<>();
-        changeToArray(A);
-        for (int pointA = 0;pointA<aList.size();pointA++){
-            if (aList.get(pointA).equals(bList.get(0))){
-                boolean isEqual = true;
-                for (int pointB = 1;pointB<bList.size();pointB++){
-                    if (!aList.get(pointA+pointB).equals(bList.get(pointB))){
-                        isEqual = false;
-                        break;
-                    }
-                }
-                if (isEqual){
-                    return true;
-                }
-            }
-        }
-        return false;
+    public TreeNode mirrorTree(TreeNode root) {
+        changeNode(root);
+        return root;
     }
-    public void changeToArray(TreeNode a){
-        if (a==null){
-            aList.add(-1);
-        }else {
-            aList.add(a.val);
-            changeToArray(a.left);
-            changeToArray(a.right);
+    public void changeNode(TreeNode root){
+        if (root!=null&&(root.left!=null||root.right!=null)){
+            TreeNode node = root.right;
+            root.right =  root.left;
+            root.left = node;
+            changeNode(root.left);
+            changeNode(root.right);
         }
+    }
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        return (A != null&&B != null)&&(compareNode(A,B)||isSubStructure(A.left,B)||isSubStructure(A.right,B));
+    }
+
+    public boolean compareNode(TreeNode A,TreeNode B){
+        if(B == null) return true;
+        if(A == null || A.val != B.val) return false;
+        return compareNode(A.left, B.left) && compareNode(A.right, B.right);
     }
 
     public List<List<Integer>> levelOrder(TreeNode root) {
