@@ -10,12 +10,43 @@ import com.company.Utils.TrimClassName;
 
 /*这个类存放各种数据的的注入方法*/
 public class InvokParameter {
-    public Object invokParameter(String str, Class clazz) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public Object invokParameter(String str, Class clazz) throws   InvocationTargetException, IllegalAccessException {
         String methodName = TrimClassName.TrimClassName(clazz, "ChangeTo");
-        Method method = this.getClass().getMethod(methodName, String.class);
+        Method method = null;
+        try {
+            method = this.getClass().getMethod(methodName, String.class);
+        } catch (NoSuchMethodException e) {
+            System.out.println("注入方法未实现");
+        }
         return method.invoke(this, str);
     }
-
+    //注入二维数组
+    public Object ChangeTorrI(String str){
+        str = str.substring(2,str.length()-2);
+        String[] split = str.split("],\\[");
+        int[][] ints = new int[split.length][(split[0].length() + 1) / 2];
+        for (int i = 0;i<ints.length;i++){
+            for (int j = 0;j<ints[0].length;j++){
+                String[] split1 = split[i].split(",");
+                ints[i][j] = Integer.valueOf(split1[j]);
+            }
+        }
+        return ints;
+    }
+    //注入一维数组
+    public Object ChangeTorI(String str){
+        str = str.substring(1,str.length()-1);
+        String[] split = str.split(",");
+        int[] ints = new int[split.length];
+        for (int i = 0;i<ints.length;i++){
+            ints[i] = Integer.valueOf(split[i]);
+        }
+        return ints;
+    }
+    //注入int
+    public Object ChangeToint(String str){
+        return Integer.valueOf(str);
+    }
     //数组转为树
     public Object ChangeToTreeNode(String str) {
         //去掉中括号
