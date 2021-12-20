@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.Queue;
-
+import com.company.Bean.*;
 import com.company.Bean.TreeNode;
 import com.company.Utils.TrimClassName;
 
@@ -19,6 +19,22 @@ public class InvokParameter {
             System.out.println("注入方法未实现");
         }
         return method.invoke(this, str);
+    }
+    //注入链表
+    public Object ChangeToListNode(String str){
+        if (str.length()<=2){
+            return null;
+        }
+        str = str.substring(1,str.length()-1);
+        String[] split = str.split(",");
+        ListNode head = new ListNode(Integer.valueOf(split[0]));
+        ListNode point = head;
+        for (int i = 1;i< split.length;i++){
+            ListNode listNode = new ListNode(Integer.valueOf(split[i]));
+            point.next = listNode;
+            point = point.next;
+        }
+        return head;
     }
     //注入二维数组
     public Object ChangeTorrI(String str){

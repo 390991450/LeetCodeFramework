@@ -1,7 +1,9 @@
 package com.company.Utils;
 
+import com.company.Bean.*;
 /*在这里传入类名以及要附加字符串,生产需要的方法名*/
 public class TrimClassName {
+
     public static String TrimClassName(Class clazz, String plus) {
         String clazzName = clazz.getName();
         //在这里处理一下类名

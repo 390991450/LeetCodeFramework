@@ -2,7 +2,7 @@ package com.company.Package;
 
 import com.company.Package.InvokParameter;
 import com.company.Screen.Methods;
-
+import com.company.Bean.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 

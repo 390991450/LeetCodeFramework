@@ -2,13 +2,25 @@ package com.company.Screen;
 
 import java.util.*;
 
-import com.company.Bean.TreeNode;
+import com.company.Bean.*;
 
 import javax.naming.MalformedLinkException;
 
 /*这里存放所有的算法*/
 
 public class Methods {
+    public ListNode deleteNode(ListNode head, int val) {
+        ListNode listNode = new ListNode(-1);
+        listNode.next = head;
+        head = listNode;
+        while (head!=null&&head.next!=null){
+            if (head.next.val==val){
+                head.next = head.next.next;
+            }
+            head = head.next;
+        }
+        return listNode.next;
+    }
     public int findJudge(int n, int[][] trust) {
         HashSet<Integer> falseSet = new HashSet<>();
         HashSet<Integer> trueSet = new HashSet<>();

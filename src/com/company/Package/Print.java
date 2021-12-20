@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import com.company.Bean.*;
 
 /*这个类存放各种数据的打印方法*/
 public class Print {
@@ -21,6 +22,18 @@ public class Print {
             System.out.println("缺少输出方法");
         }
         method.invoke(this, obj);
+    }
+    //输出链表
+    public void PrintListNode(Object obj){
+        StringBuffer s = new StringBuffer("[");
+        ListNode point = (ListNode) obj;
+        while (point!=null){
+            s.append(point.val);
+            s.append(',');
+            point = point.next;
+        }
+        s.append(']');
+        System.out.println(s);
     }
     //输出int
     public void Printint(Object obj){
